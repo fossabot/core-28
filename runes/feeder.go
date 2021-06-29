@@ -112,12 +112,12 @@ func (f *Feeder) atLeast(n int) bool {
 }
 
 // Currently buffered runes
-func (f *Feeder) Buffered() []rune {
+func (f *Feeder) Runes() []rune {
 	return f.out
 }
 
 // Count of currently buffered runes
-func (f *Feeder) Len() int {
+func (f *Feeder) Buffered() int {
 	return len(f.out)
 }
 
