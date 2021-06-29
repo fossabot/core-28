@@ -28,7 +28,7 @@ func NewFeederString(s string) *Feeder {
 	return NewFeeder(strings.NewReader(s))
 }
 
-// NewFeederString creates a new Feeder using a Reader as input
+// NewFeeder creates a new Feeder using a Reader as input
 func NewFeeder(in io.Reader) *Feeder {
 	rd, ok := in.(io.RuneReader)
 	if !ok {
