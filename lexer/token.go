@@ -23,6 +23,20 @@ type TokenPosition struct {
 	Row  int
 }
 
+func (pos *TokenPosition) Reset() {
+	pos.Line = 1
+	pos.Row = 1
+}
+
+func (pos *TokenPosition) Step(n int) {
+	pos.Row += n
+}
+
+func (pos *TokenPosition) NewLine() {
+	pos.Line += 1
+	pos.Row = 1
+}
+
 // Token
 type Token interface {
 	Type() TokenType
