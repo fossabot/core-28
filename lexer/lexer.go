@@ -16,6 +16,8 @@ type Lexer interface {
 	Position() TokenPosition // base for the next token
 	Tokens() <-chan Token    // tokens output
 
+	AtLeast(n int) ([]rune, error)
+
 	NewLine()
 	Step(n int)
 
@@ -49,6 +51,21 @@ func (lex *lexer) Run() {
 	for state := lex.start; state != nil; {
 		state = state(lex)
 	}
+}
+
+func (lex *lexer) AtLeast(n int) ([]rune, error) {
+	min := lex.cursor
+	if n > 0 {
+		min += n
+	}
+
+	s, err := lex.in.AtLeast(min)
+	if len(s) > lex.cursor {
+		s = s[lex.cursor:]
+	} else {
+		s = nil
+	}
+	return s, err
 }
 
 func (lex *lexer) Position() TokenPosition {
