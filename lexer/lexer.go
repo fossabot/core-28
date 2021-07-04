@@ -101,6 +101,11 @@ func (lex *lexer) Emit(typ TokenType) {
 }
 
 func (lex *lexer) EmitError(err error) {
+	// if no error is passed, assume they mean EOF
+	if err == nil {
+		err = EOF
+	}
+
 	lex.tokens <- NewErrorToken(err, lex.pos)
 }
 
